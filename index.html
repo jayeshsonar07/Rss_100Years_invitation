@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राष्ट्रीय स्वयंसेवक संघ | विजयदशमी उत्सव</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Baloo 2 for Devanagari elegance -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8gT4SPG1T6MCT2wS7k2Vz9oD5n6N3sH6a3lJ6P+n5q7oR9t[...]">
+    <style>
+        /* Custom Devanagari Font */
+        .devanagari {
+            font-family: 'Baloo 2', cursive;
+        }
+
+        /* Dynamic Background with Saffron/Gold/Maroon Palette */
+        body {
+            background: linear-gradient(-45deg, #FF6600, #FFD700, #800000, #FF4500);
+            background-size: 400% 400%;
+            animation: gradient-bg 15s ease infinite;
+        }
+
+        @keyframes gradient-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Flag Waving Animation */
+        .flag-container {
+            perspective: 500px;
+        }
+
+        .bhagwa-flag {
+            /* Saffron Color */
+            background-color: #FF9933;
+            box-shadow: 0 4px 15px rgba(255, 153, 51, 0.5);
+            transform-origin: 0% 50%;
+            animation: wave 3s infinite alternate;
+        }
+
+        @keyframes wave {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(5deg); }
+        }
+
+        /* Sparkle effect using filter on hover/touch */
+        .bhagwa-flag:hover, .bhagwa-flag.touched {
+            filter: drop-shadow(0 0 10px #FFD700) drop-shadow(0 0 20px #FF9933);
+        }
+
+        /* Custom Card Styles */
+        #card-preview-container {
+            height: 350px; /* Fixed height for canvas */
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 4px solid #FF9933;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Particle effect for flag sparkle */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700, #ff9933);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            width: 8px;
+            height: 8px;
+            z-index: 50;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact-info > div {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-gray-900 dewanagari p-2 md:p-6">
+    <div id="app-container" class="max-w-6xl mx-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 md:p-8 space-y-12">
+
+        <!-- 1. Top Banner / Header Strip -->
+        <header class="text-center text-sm md:text-base font-bold text-white bg-[#800000] p-2 rounded-xl shadow-lg">
+            <div class="flex justify-between items-center max-w-4xl mx-auto dewanagari">
+                <span class="p-1">युगाब्द ५१२७</span>
+                <span class="text-xl md:text-2xl font-extrabold text-[#FFD700]">।। ॐ ।।</span>
+                <span class="p-1">शिवराज शके ३५१</span>
+            </div>
+        </header>
+
+        <!-- 2. Hero Section -->
+        <section id="hero" class="text-center relative overflow-hidden p-6 md:p-10 rounded-2xl bg-gradient-to-br from-white to-[#fff0e6] shadow-xl border-t-4 border-[#FF9933] fade-in">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <!-- Titles and Countdown -->
+                <div class="md:w-3/5 text-center md:text-left">
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-[#FF6600] leading-tight mb-2">
+                        राष्ट्रीय स्वयंसेवक संघ, शिरपूर
+                    </h1>
+                    <h2 class="text-xl md:text-3xl font-bold text-[#800000] mb-6">
+                        विजयदशमी उत्सव
+                    </h2>
+                    
+                    <!-- Countdown Timer -->
+                    <div class="mt-8 bg-[#FF9933]/10 p-4 rounded-xl shadow-inner inline-block">
+                        <p id="countdown-title" class="text-lg md:text-xl font-bold text-[#800000] mb-2">
+                            पथ-संचलन सुरू होण्यास बाकी
+                        </p>
+                        <div id="countdown-timer" class="flex justify-center md:justify-start space-x-2 md:space-x-4 text-4xl md:text-5xl font-extrabold text-[#FF4500]">
+                            <!-- Timer values inserted by JS -->
+                        </div>
+                        <p class="text-sm md:text-base text-gray-600 mt-2">
+                            दिनांक: २ ऑक्टोबर, सकाळी ०९ वाजपासून
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Animated Bhagwa Flag -->
+                <div class="md:w-2/5 flex justify-center md:justify-end mt-8 md:mt-0 flag-container">
+                    <div id="bhagwa-flag" class="bhagwa-flag w-40 h-60 md:w-48 md:h-72 rounded-t-lg transition-all duration-300 relative cursor-pointer" onclick="handleFlagTouch(event)" onmouseover="h[...]">
+                        <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white font-bold text-3xl pb-2">ॐ</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Invitation / Event Details Section -->
+        <section id="event-details" class="p-6 md:p-10 bg-gray-50 rounded-2xl shadow-inner fade-in">
+            <p class="text-xl md:text-2xl font-bold text-[#800000] mb-4">श्रीमान / श्रीमती, सस्नेह नमस्कार</p>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
+                श्री विजयदशमी म्हणजे प
